@@ -1,5 +1,6 @@
 /*
     Автор: AlexNaraito
+    TODO: Дорешать вторую задачу, конкретнее понять и исправить проверку.
     Задача 1: У владельца магазина проката тобогганов на Северном полюсе тяжелый день. "Что-то не так с нашими компьютерами; мы не можем войти!" Вы спрашиваете, можно ли взглянуть.
 
     Их база паролей, кажется, немного повреждена: некоторые пароли не были разрешены официальной корпоративной политикой тобоггана, которая действовала на момент их выбора.
@@ -40,6 +41,12 @@ bool check_task1(int num1, int num2, char sim, char* msg){
         if(msg[i] == sim) count++;
     }
     if(count >= num1 && count <= num2) return true;
+    return false;
+}
+
+bool check_task2(int num1, int num2, char sim, char* msg){
+    if(msg[num1-1] == msg[num2-1]) return false;
+    if((msg[num1-1] == sim) || (msg[num2-1] == sim)) return true;
     return false;
 }
 
@@ -101,6 +108,16 @@ void fill_array(Pair* arr, const char* path){
 int main(){
     Pair* arr = (Pair*)malloc(sizeof(Pair) * 1000);
     fill_array(arr,"../data/task2.txt");
-    for(int i = 0; i < 1000; i++) printf("Arr[%d]:%d - %d %c:%s\n",i,arr[i].num1,arr[i].num2,arr[i].sim,arr[i].str);
+    int count = 0;
+    for (int i = 0; i < 1000; i++){
+        if(check_task1(arr[i].num1,arr[i].num2,arr[i].sim,arr[i].str)) count++;
+    }
+    printf("Task 1:%d\n",count);
+    count = 0;
+    for (int i = 0; i < 1000; i++){
+        if(check_task2(arr[i].num1,arr[i].num2,arr[i].sim,arr[i].str)) count++;
+    }
+    printf("Task 2:%d\n",count);
+    free(arr);
     return 0;
 }
