@@ -1,6 +1,5 @@
 /*
     Автор: AlexNaraito
-    TODO: Дорешать вторую задачу, конкретнее понять и исправить проверку.
     Задача 1: У владельца магазина проката тобогганов на Северном полюсе тяжелый день. "Что-то не так с нашими компьютерами; мы не можем войти!" Вы спрашиваете, можно ли взглянуть.
 
     Их база паролей, кажется, немного повреждена: некоторые пароли не были разрешены официальной корпоративной политикой тобоггана, которая действовала на момент их выбора.
@@ -72,7 +71,7 @@ void fill_array(Pair* arr, const char* path){
             }
             if(line[i] == ':') {
                 flag = 3;
-                i++;
+                i+=2;
             }
             if(flag == 0) {
                 buf_num1[c_num1] = line[i];
@@ -112,12 +111,12 @@ int main(){
     for (int i = 0; i < 1000; i++){
         if(check_task1(arr[i].num1,arr[i].num2,arr[i].sim,arr[i].str)) count++;
     }
-    printf("Task 1:%d\n",count);
+    printf("Subtask 1:%d\t",count);
     count = 0;
     for (int i = 0; i < 1000; i++){
         if(check_task2(arr[i].num1,arr[i].num2,arr[i].sim,arr[i].str)) count++;
     }
-    printf("Task 2:%d\n",count);
+    printf("Subtask 2:%d\n",count);
     free(arr);
     return 0;
 }

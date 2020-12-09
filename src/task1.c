@@ -26,27 +26,40 @@ void error(const char* msg){
     exit(EXIT_FAILURE);
 }
 
-int main(){
-    int result2 = 0,result = 0,i = 0;
-    int* arr = (int*)malloc(sizeof(int) * 200); 
-    FILE* file = fopen("data/task1.txt","r");
+void get_arr(int* arr){
+    FILE* file = fopen("../data/task1.txt","r");
     char* line;
     char str[6];
     if (file == NULL) error("FILE not find.");
-    while(1){
+    for(int i = 0; i < 200; i++){
         line = fgets(str,6,file);
         if(line == NULL) break;
         arr[i] = atoi(str);
-        i++;
     }
-    for(i = 0; i < 200; i++)
-        for(int j = 0; j < 200; j++){
-            for(int k = 0; k < 200; k++)
-                if(arr[i] + arr[j] + arr[k] == 2020)
-                    result2 = arr[i] * arr[j] * arr[k];
+}
+
+int get_result_1(int* arr){
+    int result = 0;
+    for(int i = 0; i < 200; i++)
+        for(int j = 0; j < 200; j++)
             if(arr[i] + arr[j] == 2020) 
                 result = arr[i] * arr[j];
-        }
-    printf("Result:%d Result2:%d\n",result,result2);
+    return result;
+}
+
+int get_result_2(int* arr){
+    int result = 0;
+    for(int i = 0; i < 200; i++)
+        for(int j = 0; j < 200; j++)
+            for(int k = 0; k < 200; k++)
+                if(arr[i] + arr[j] + arr[k] == 2020)
+                    result = arr[i] * arr[j] * arr[k];
+    return result;
+}
+
+int main(){
+    int* arr = (int*)malloc(sizeof(int) * 200); 
+    get_arr(arr);
+    printf("Result:%d\tResult2:%d\n",get_result_1(arr),get_result_2(arr));
     return 0;
 }
